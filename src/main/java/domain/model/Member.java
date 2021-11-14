@@ -7,6 +7,7 @@ public class Member {
     private final String email;
     private final String password;
     private final Address address;
+    private CreditCard creditCard;
 
     public Member(MemberId id, String lastname, String firstname, String email, String password, Address address) {
         this.id = id;
@@ -15,6 +16,7 @@ public class Member {
         this.email = email;
         this.password = password;
         this.address = address;
+        this.creditCard = null;
     }
 
     public static Member of(MemberId id, String lastname, String firstname, String email, String password, Address address) {
@@ -43,5 +45,13 @@ public class Member {
 
     public Address getAddress() {
         return address;
+    }
+
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void addCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
     }
 }

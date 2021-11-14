@@ -15,13 +15,14 @@ public class MemberApplicationService {
         this.memberRepository = memberRepository;
     }
 
-    public void apply(CreateMember createMember) {
+    public MemberId apply(CreateMember createMember) {
         final MemberId id = memberRepository.nextIdentity();
         Member member = Member.of(id,createMember.lastname, createMember.firstname, createMember.email, createMember.password, createMember.address);
         verifyApplicationOf(member);
         memberRepository.add(member);
 
-        System.out.println("Application of Member with Id " + id.getValue());
+        System.out.println("Application of Member with email " + member.getEmail() + " verified");
+        return id;
     }
 
     public void verifyApplicationOf(Member member) {
@@ -30,13 +31,13 @@ public class MemberApplicationService {
             throw NotValidApplicationException.emptyName();
         }
         if(member.getPassword().length() < PASSWORD_MIN_LENGTH) {
-            throw NotValidApplicationException.tooShortPassword();
+            throw NotValidApplicationException.withPassword(member.getPassword());
         }
         if(!emailValidatorService.validate(member.getEmail())) {
-            throw NotValidApplicationException.incorrectEmail();
+            throw NotValidApplicationException.withEmail(member.getEmail());
         }
         if(memberRepository.findByEmail(member.getEmail()).isPresent()) {
-            throw NotValidApplicationException.emailAlreadyExists();
+            throw NotValidApplicationException.withExistingEmail(member.getEmail());
         }
 
 
