@@ -1,4 +1,4 @@
-package domain.model;
+package domain.exception;
 
 public class NotValidApplicationException extends RuntimeException {
     private NotValidApplicationException(String message) {

@@ -2,7 +2,7 @@ package infrastructure;
 
 import domain.model.Member;
 import domain.model.MemberId;
-import domain.model.NoSuchMemberException;
+import domain.exception.NoSuchMemberException;
 import domain.repository.MemberRepository;
 
 import java.util.Map;

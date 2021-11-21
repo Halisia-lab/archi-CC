@@ -2,7 +2,7 @@ package domain.service;
 
 import domain.model.CreditCard;
 import domain.model.Member;
-import domain.model.NotValidCreditCardException;
+import domain.exception.NotValidCreditCardException;
 
 import java.time.LocalDate;
 

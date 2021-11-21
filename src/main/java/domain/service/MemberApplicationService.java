@@ -3,7 +3,7 @@ package domain.service;
 import domain.model.CreateMember;
 import domain.model.Member;
 import domain.model.MemberId;
-import domain.model.NotValidApplicationException;
+import domain.exception.NotValidApplicationException;
 import domain.repository.MemberRepository;
 
 public class MemberApplicationService {
