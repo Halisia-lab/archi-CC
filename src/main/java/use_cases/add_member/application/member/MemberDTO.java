@@ -1,6 +1,6 @@
 package use_cases.add_member.application.member;
 
-import use_cases.add_member.domain.MemberId;
+import domain.MemberId;
 
 @SuppressWarnings("all")
 public class MemberDTO {

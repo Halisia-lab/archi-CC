@@ -1,5 +1,7 @@
 package use_cases.add_member.domain;
 
+import domain.Member;
+import domain.MemberId;
 import kernel.EventSourcedRepository;
 
 import java.util.List;

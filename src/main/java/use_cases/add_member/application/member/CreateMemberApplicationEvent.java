@@ -1,7 +1,7 @@
 package use_cases.add_member.application.member;
 
 import kernel.ApplicationEvent;
-import use_cases.add_member.domain.MemberId;
+import domain.MemberId;
 
 public class CreateMemberApplicationEvent implements ApplicationEvent {
     private final MemberId memberId;

@@ -8,4 +8,12 @@ public final class Address {
         this.street = street;
         this.city = city;
     }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getCity() {
+        return city;
+    }
 }

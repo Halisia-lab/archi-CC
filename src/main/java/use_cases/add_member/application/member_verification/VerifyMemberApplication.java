@@ -2,7 +2,7 @@ package use_cases.add_member.application.member_verification;
 
 import kernel.Command;
 import use_cases.add_member.application.member.CreateMember;
-import use_cases.add_member.domain.MemberId;
+import domain.MemberId;
 
 public class VerifyMemberApplication implements Command {
     public final MemberId memberId;

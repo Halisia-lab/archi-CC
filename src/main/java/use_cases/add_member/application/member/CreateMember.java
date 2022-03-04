@@ -2,9 +2,9 @@ package use_cases.add_member.application.member;
 
 import kernel.Command;
 import use_cases.add_member.application.payment.CreatePayment;
-import use_cases.add_member.domain.Role;
+import domain.Role;
 
-public final class CreateMember implements Command {
+public abstract class CreateMember implements Command {
 
     public final String lastname;
     public final String firstname;

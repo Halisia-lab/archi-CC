@@ -5,7 +5,10 @@ import kernel.Event;
 import kernel.EventDispatcher;
 import use_cases.add_member.application.member_verification.VerifyMemberApplication;
 import use_cases.add_member.application.member_verification.VerifyMemberApplicationHandler;
-import use_cases.add_member.domain.*;
+import use_cases.add_member.domain.Address;
+import domain.Member;
+import use_cases.add_member.domain.MemberEventSourcedRepository;
+import domain.MemberId;
 
 public class CreateMemberCommandHandler implements CommandHandler<CreateMember, MemberId> {
     private final MemberEventSourcedRepository memberEventSourcedRepository;

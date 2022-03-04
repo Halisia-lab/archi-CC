@@ -1,9 +1,8 @@
 package use_cases.add_member.infrastructure;
 
+import domain.*;
 import kernel.DomainEvent;
-import use_cases.add_member.domain.Member;
-import use_cases.add_member.domain.MemberEventSourcedRepository;
-import use_cases.add_member.domain.MemberId;
+import use_cases.add_member.domain.*;
 import use_cases.add_member.exception.NoSuchMemberException;
 import use_cases.add_member.exception.NotValidApplicationException;
 
@@ -18,15 +17,6 @@ public final class InMemoryMemberRepository implements MemberEventSourcedReposit
     @Override
     public MemberId nextIdentity() {
         return new MemberId(count.incrementAndGet());
-    }
-
-    @Override
-    public Member findById(MemberId id) {
-        final List<DomainEvent> recordedEvents = data.get(id);
-        if (recordedEvents == null) {
-            throw NoSuchMemberException.withId(id);
-        }
-        return Member.of(id, recordedEvents);
     }
 
     public Optional<Member> findByEmail(String email) {
@@ -59,8 +49,20 @@ public final class InMemoryMemberRepository implements MemberEventSourcedReposit
         List<Member> result = new ArrayList<>();
         final Set<Map.Entry<MemberId, List<DomainEvent>>> entries = data.entrySet();
         for (Map.Entry<MemberId, List<DomainEvent>> entry : entries) {
-            result.add(Member.of(entry.getKey(), entry.getValue()));
+            Member member = findById(entry.getKey());
+
+            result.add(member.getRole() == Role.CONTRACTOR ? Contractor.of(entry.getKey(), entry.getValue()) : Tradesman.of(entry.getKey(), entry.getValue()));
         }
         return result;
     }
+
+    @Override
+    public Member findById(MemberId id) {
+        final List<DomainEvent> recordedEvents = data.get(id);
+        if (recordedEvents == null) {
+            throw NoSuchMemberException.withId(id);
+        }
+        return Member.of(id, recordedEvents);
+    }
+
 }

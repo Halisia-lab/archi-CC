@@ -1,6 +1,6 @@
 package use_cases.add_member.exception;
 
-import use_cases.add_member.domain.MemberId;
+import domain.MemberId;
 
 public final class NoSuchMemberException extends RuntimeException {
     private NoSuchMemberException(String message) {
