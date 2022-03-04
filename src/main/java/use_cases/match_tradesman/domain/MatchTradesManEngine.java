@@ -32,10 +32,6 @@ public final class MatchTradesManEngine implements Predicate<Tradesman> {
         return requestId;
     }
 
-    public List<Tradesman> getCandidates() {
-        return candidates;
-    }
-
     public List<Tradesman> searchCandidates() {
         final Stream<Member> allTradesMen = memberEventSourcedRepository.findAll().stream().filter(member -> member.getRole() == Role.TRADESMAN);
         return allTradesMen.map(member -> (Tradesman) member).collect(Collectors.toList());
@@ -89,6 +85,7 @@ public final class MatchTradesManEngine implements Predicate<Tradesman> {
     public boolean test(Tradesman tradesman) {
         try {
             VerifyMatchingTradesman verifyMatchingTradesman = new VerifyMatchingTradesman(requestEventSourcedRepository);
+            verifyMatchingTradesman.validate(tradesman);
             return tradesman.equals(this.findBestFitTradesman());
         } catch (Exception e) {
             System.out.println("ERROR during MatchTradesManEngine : " + e.getMessage());

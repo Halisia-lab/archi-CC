@@ -11,7 +11,6 @@ import use_cases.add_member.application.payment_verification.VerifyPaymentApplic
 import use_cases.add_member.domain.*;
 import use_cases.add_member.infrastructure.InMemoryMemberRepository;
 import use_cases.add_member.infrastructure.InMemoryPaymentRepository;
-import use_cases.match_tradesman.application.VerifyMatchRequest;
 import use_cases.match_tradesman.domain.MatchTradesManEngine;
 import use_cases.add_member.application.member.CreateContractor;
 import use_cases.add_member.application.member.CreateTradesman;
