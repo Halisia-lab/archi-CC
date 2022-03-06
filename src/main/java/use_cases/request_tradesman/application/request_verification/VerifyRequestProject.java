@@ -1,8 +1,8 @@
 package use_cases.request_tradesman.application.request_verification;
 
+import kernel.NotValidProjectRequestException;
 import kernel.Verification;
 import use_cases.request_tradesman.application.request.CreateRequest;
-import use_cases.request_tradesman.exception.NotValidProjectRequestException;
 
 public class VerifyRequestProject implements Verification<CreateRequest> {
 

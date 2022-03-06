@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class VerifyPaymentCCNumber implements Verification<String> {
     private final Pattern pattern;
     public VerifyPaymentCCNumber() {
-        this.pattern = Pattern.compile(PaymentFieldsRestrictions.CREDITCARD_PATTERN);;
+        this.pattern = Pattern.compile(PaymentFieldsRestrictions.CREDITCARD_PATTERN);
     }
 
     @Override

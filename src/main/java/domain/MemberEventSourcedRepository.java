@@ -1,4 +1,4 @@
-package use_cases.add_member.domain;
+package domain;
 
 import domain.Member;
 import domain.MemberId;

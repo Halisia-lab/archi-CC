@@ -1,7 +1,7 @@
 package use_cases.match_tradesman.domain;
 
+
 import domain.*;
-import use_cases.add_member.domain.MemberEventSourcedRepository;
 import use_cases.match_tradesman.application.VerifyMatchRequest;
 import use_cases.match_tradesman.application.VerifyMatchingTradesman;
 import use_cases.request_tradesman.domain.*;

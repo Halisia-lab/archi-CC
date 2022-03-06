@@ -3,7 +3,7 @@ package use_cases.add_member.application.member_verification;
 import kernel.CommandHandler;
 import kernel.Event;
 import kernel.EventDispatcher;
-import use_cases.add_member.domain.MemberEventSourcedRepository;
+import domain.MemberEventSourcedRepository;
 
 public class VerifyMemberApplicationHandler implements CommandHandler<VerifyMemberApplication, Void> {
     private final MemberEventSourcedRepository memberEventSourcedRepository;

@@ -1,7 +1,7 @@
 package use_cases.add_member.application.member_verification;
 
 import kernel.Verification;
-import use_cases.add_member.domain.MemberEventSourcedRepository;
+import domain.MemberEventSourcedRepository;
 import use_cases.add_member.exception.NotValidApplicationException;
 
 import java.util.regex.Matcher;
