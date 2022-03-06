@@ -1,6 +1,7 @@
 package use_cases.match_tradesman.domain;
 
 import domain.*;
+import kernel.Engine;
 import use_cases.add_member.domain.MemberEventSourcedRepository;
 import use_cases.match_tradesman.application.VerifyMatchRequest;
 import use_cases.match_tradesman.application.VerifyMatchingTradesman;
@@ -12,6 +13,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Engine
 public final class MatchTradesManEngine implements Predicate<Tradesman> {
 
     private final RequestEventSourcedRepository requestEventSourcedRepository;
