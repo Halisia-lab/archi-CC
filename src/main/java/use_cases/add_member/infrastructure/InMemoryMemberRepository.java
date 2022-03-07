@@ -2,7 +2,6 @@ package use_cases.add_member.infrastructure;
 
 import domain.*;
 import kernel.DomainEvent;
-import use_cases.add_member.domain.*;
 import use_cases.add_member.exception.NoSuchMemberException;
 import use_cases.add_member.exception.NotValidApplicationException;
 

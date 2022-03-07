@@ -1,10 +1,10 @@
 package use_cases.request_tradesman.application.request_verification;
 
 import kernel.Verification;
-import use_cases.add_member.domain.MemberEventSourcedRepository;
+import domain.MemberEventSourcedRepository;
 import domain.Role;
 import use_cases.request_tradesman.application.request.CreateRequest;
-import use_cases.request_tradesman.exception.NotValidContractorRequestException;
+import kernel.NotValidContractorRequestException;
 
 public class VerifyRequestContractor implements Verification<CreateRequest> {
     MemberEventSourcedRepository memberEventSourcedRepository;

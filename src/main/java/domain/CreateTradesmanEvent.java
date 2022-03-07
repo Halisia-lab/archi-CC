@@ -13,9 +13,7 @@ public class CreateTradesmanEvent extends CreateMemberEvent implements DomainEve
 
     public CreateTradesmanEvent(MemberId id, String lastname, String firstname, String email, String password, Address address, Role role) {
         super(id, lastname, firstname, email, password, address, role);
-        this.skills = skills;
-        this.availabilityZones = availabilityZones;
-        this.dailyTaxMin = dailyTaxMin;
+
     }
 
     public List<ProjectSkills> getSkills() {

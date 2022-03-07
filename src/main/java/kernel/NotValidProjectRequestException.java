@@ -1,4 +1,4 @@
-package use_cases.request_tradesman.exception;
+package kernel;
 
 public class NotValidProjectRequestException extends RuntimeException {
     private NotValidProjectRequestException(String message) {

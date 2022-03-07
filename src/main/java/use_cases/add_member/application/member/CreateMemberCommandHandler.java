@@ -7,7 +7,7 @@ import use_cases.add_member.application.member_verification.VerifyMemberApplicat
 import use_cases.add_member.application.member_verification.VerifyMemberApplicationHandler;
 import use_cases.add_member.domain.Address;
 import domain.Member;
-import use_cases.add_member.domain.MemberEventSourcedRepository;
+import domain.MemberEventSourcedRepository;
 import domain.MemberId;
 
 public class CreateMemberCommandHandler implements CommandHandler<CreateMember, MemberId> {

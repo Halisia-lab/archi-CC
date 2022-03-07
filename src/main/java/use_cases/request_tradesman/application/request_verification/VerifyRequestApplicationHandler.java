@@ -3,7 +3,7 @@ package use_cases.request_tradesman.application.request_verification;
 import kernel.CommandHandler;
 import kernel.Event;
 import kernel.EventDispatcher;
-import use_cases.add_member.domain.MemberEventSourcedRepository;
+import domain.MemberEventSourcedRepository;
 
 public class VerifyRequestApplicationHandler implements CommandHandler<VerifyRequestApplication, Void> {
     private final MemberEventSourcedRepository memberEventSourcedRepository;

@@ -11,7 +11,7 @@ public class VerifyPaymentAmount implements Verification<CreatePayment> {
 
     @Override
     public void validate(CreatePayment createPayment) {
-        if(createPayment.amount != PaymentFieldsRestrictions.APPLICATION_AMOUNT) {
+        if(!createPayment.amount.equals(PaymentFieldsRestrictions.APPLICATION_AMOUNT)) {
             throw NotValidPaymentException.withAmount(createPayment.amount);
         }
     }
