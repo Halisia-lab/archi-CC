@@ -12,7 +12,7 @@ import use_cases.add_member.domain.*;
 import use_cases.add_member.infrastructure.InMemoryMemberRepository;
 import use_cases.add_member.infrastructure.InMemoryPaymentRepository;
 import use_cases.assign_tradesman.application.request_verification.VerifyAssignRequestApplicationHandler;
-import use_cases.assign_tradesman.domain.AssignTradesmanEngine;
+import use_cases.assign_tradesman.domain.AssignTradesmanService;
 import use_cases.assign_tradesman.domain.Booking;
 import use_cases.assign_tradesman.domain.BookingId;
 import use_cases.assign_tradesman.infrastructure.InMemoryAssignRequestRepository;
@@ -125,12 +125,19 @@ public class App {
         InMemoryBookingRepository bookingRepository = new InMemoryBookingRepository();
         InMemoryAssignRequestRepository assignRequestRepository = new InMemoryAssignRequestRepository();
         VerifyAssignRequestApplicationHandler verifyAssignRequestApplicationHandler = new VerifyAssignRequestApplicationHandler(memberRepository, eventEventDispatcher);
-        AssignTradesmanEngine assignTradesmanEngine = new AssignTradesmanEngine(assignRequestRepository, eventEventDispatcher, verifyAssignRequestApplicationHandler, bookingRepository);
-        BookingId bookingId = assignTradesmanEngine.doAssignTradesman(predictedBestFitCandidate.id(), memberId, project);
+        AssignTradesmanService assignTradesmanService = new AssignTradesmanService(assignRequestRepository, eventEventDispatcher, verifyAssignRequestApplicationHandler, bookingRepository);
+        BookingId bookingId = assignTradesmanService.doAssignTradesman(predictedBestFitCandidate.id(), memberId, project);
 
         // TEST
         List<Booking> bestFitTradesmanBookings = bookingRepository.findAllByTradesmanId(predictedBestFitCandidate.id());
         System.out.println(bestFitTradesmanBookings.size());
+        for (Booking booking : bestFitTradesmanBookings){
+            System.out.println(booking.toString());
+        }
+
+        BookingId bookingId2 = assignTradesmanService.doAssignTradesman(predictedBestFitCandidate.id(), memberId,
+                new Project("project1", LocalDate.of(2022,12,30), Duration.ofDays(30), 1000, ProjectLocalization.ILE_DE_FRANCE, List.of(ProjectSkills.BUILDING_KNOWLEDGE, ProjectSkills.MATHS_SKILLS), List.of("job1")));
+
         for (Booking booking : bestFitTradesmanBookings){
             System.out.println(booking.toString());
         }

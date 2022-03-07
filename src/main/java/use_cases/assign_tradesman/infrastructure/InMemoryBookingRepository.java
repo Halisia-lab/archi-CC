@@ -80,7 +80,7 @@ public class InMemoryBookingRepository implements BookingEventSourcedRepository 
         for (Map.Entry<BookingId, List<DomainEvent>> entry : entries) {
             if(Booking.of(entry.getKey(), entry.getValue()).getTradesmanId().equals(tradesmanId)
             && Booking.of(entry.getKey(), entry.getValue()).getStartDate().plusDays(
-                    Booking.of(entry.getKey(), entry.getValue()).getDuration().toDays()).isAfter(startDate)) {
+                    Booking.of(entry.getKey(), entry.getValue()).getDuration().toDays()-1).isAfter(startDate)) {
                 result.add(Booking.of(entry.getKey(), entry.getValue()));
             }
         }

@@ -9,15 +9,18 @@ import use_cases.assign_tradesman.application.booking.CreateBookingCommandHandle
 import use_cases.assign_tradesman.application.request.CreateAssignRequest;
 import use_cases.assign_tradesman.application.request.CreateAssignRequestCommandHandler;
 import use_cases.assign_tradesman.application.request_verification.VerifyAssignRequestApplicationHandler;
+import use_cases.assign_tradesman.exception.UnavailableTradesmanException;
 
-public class AssignTradesmanEngine {
+import java.util.List;
+
+public class AssignTradesmanService {
 
     private final AssignRequestEventSourcedRepository assignRequestEventSourcedRepository;
     private final EventDispatcher<Event> eventEventDispatcher;
     private final VerifyAssignRequestApplicationHandler verifyAssignRequestApplicationHandler;
     private final BookingEventSourcedRepository bookingEventSourcedRepository;
 
-    public AssignTradesmanEngine(AssignRequestEventSourcedRepository assignRequestEventSourcedRepository, EventDispatcher<Event> eventEventDispatcher, VerifyAssignRequestApplicationHandler verifyAssignRequestApplicationHandler, BookingEventSourcedRepository bookingEventSourcedRepository) {
+    public AssignTradesmanService(AssignRequestEventSourcedRepository assignRequestEventSourcedRepository, EventDispatcher<Event> eventEventDispatcher, VerifyAssignRequestApplicationHandler verifyAssignRequestApplicationHandler, BookingEventSourcedRepository bookingEventSourcedRepository) {
         this.assignRequestEventSourcedRepository = assignRequestEventSourcedRepository;
         this.eventEventDispatcher = eventEventDispatcher;
         this.verifyAssignRequestApplicationHandler = verifyAssignRequestApplicationHandler;
@@ -39,7 +42,7 @@ public class AssignTradesmanEngine {
                 CreateBooking createBooking = new CreateBooking(project.getStartDate(), project.getDuration(), project, contractorId, tradesmanId);
                 return bookingCommandHandler.handle(createBooking);
             } else {
-                System.out.println("TRADESMAN WITH ID " + assignRequest.getTradesmanId() + " IS NOT AVAILABLE ANYMORE");
+                throw UnavailableTradesmanException.withId(assignRequest.getTradesmanId());
             }
             } catch (Exception e) {
                 System.out.println("ERROR DURING BOOKING APPLICATION : " + e.getMessage());
@@ -50,7 +53,15 @@ public class AssignTradesmanEngine {
     }
 
     private Boolean isAvailableTradesman(MemberId tradesmanId, Project project){
-        return bookingEventSourcedRepository.findAllByTradesmanEndingAfterDate(tradesmanId, project.getStartDate()).size() == 0;
+        List<Booking> bookings = bookingEventSourcedRepository.findAllByTradesmanEndingAfterDate(tradesmanId, project.getStartDate());
+        if(bookings.size() != 0){
+            for(Booking booking : bookings){
+                if (!project.getStartDate().plusDays(project.getDuration().toDays()-1).isBefore(booking.getStartDate())){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }
